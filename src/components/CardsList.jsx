@@ -29,13 +29,11 @@ function CardsList() {
 
   const handleShowAll = () => {
     setFilterBtnDis({ all: true, fav: false });
-    console.log(filterBtnDis);
     setCardData(prevCardsData);
   };
 
   const handleShowFav = () => {
     setFilterBtnDis({ all: false, fav: true });
-    console.log(filterBtnDis);
     const cardsLiked = cardData.filter(function (item) {
       return item.like === true;
     });
