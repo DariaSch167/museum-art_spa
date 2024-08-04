@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>RijksData</h1>
+        <h1>The Rijksmuseum - RijksData API</h1>
       </header>
       <main>
         <CardList />

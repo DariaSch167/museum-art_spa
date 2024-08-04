@@ -1,0 +1,105 @@
+$mainLight: #cdaa7d;
+$mainDark: #8e632f;
+$accentLight: #d71546;
+$accentDark: #bb0633;
+
+.cards__wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  list-style-type: none;
+  position: relative;
+  width: 80%;
+  height: 20rem;
+  margin: 2rem 1rem;
+
+  &__img {
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 0.25rem;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: flex-end;
+    padding: 0 1rem;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    &-like,
+    &-like__active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      border: none;
+      border-radius: 50%;
+      &:active {
+        background-color: $mainDark;
+      }
+    }
+
+    &-like {
+      background-color: $mainLight;
+      &:hover {
+        background-color: $mainDark;
+      }
+      &:active {
+        background-color: $accentLight;
+      }
+    }
+    &-like__active {
+      background-color: $accentLight;
+      &:hover {
+        background-color: $accentDark;
+      }
+      &:active {
+        background-color: $mainDark;
+      }
+    }
+  }
+}
+
+.cards__filter {
+  display: flex;
+  justify-content: center;
+  &-btn {
+    margin: 2rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: underline;
+
+    &:hover {
+      color: $mainDark;
+    }
+    &:active {
+      color: $accentLight;
+    }
+    &:disabled {
+      color: $accentLight;
+    }
+  }
+}
+
+header {
+  background-color: $mainLight;
+  padding: 1rem 0;
+
+  & h1 {
+    text-align: center;
+    margin: 0;
+  }
+}
