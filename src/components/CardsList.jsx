@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCards } from "../store/cardsSlice.js";
 import usePrevious from "../hooks/usePrevious.js";
 import Card from "./Card.jsx";
 import "../style.scss";
 import testData from "../test_data.json";
 
 function CardsList() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.cards);
+
+  useEffect(() => {
+    dispatch(fetchCards(), []);
+  });
+
+  console.log(data);
+
   const initialData = testData.map(function (item) {
     return (item = { ...item, like: false });
   });
