@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import usePrevious from "../hooks/usePrevious.js";
 import Card from "./Card.jsx";
 import "../style.scss";
 import testData from "../test_data.json";
 
 function CardsList() {
-  const newTestData = testData.map(function (item) {
+  const initialData = testData.map(function (item) {
     return (item = { ...item, like: false });
   });
-  const [cardData, setCardData] = useState(newTestData);
+  const [cardData, setCardData] = useState(initialData);
 
   const handleLikeChange = (id) => {
     const card = cardData.find(function (item) {
       return item.id === id;
     });
-
     const updCardData = cardData.map((item) => {
       item = item.id === id ? { ...item, like: !card.like } : item;
       return item;
@@ -21,11 +21,42 @@ function CardsList() {
     setCardData(updCardData);
   };
 
+  const [filterBtnDis, setFilterBtnDis] = useState({
+    all: true,
+    fav: false,
+  });
+  const prevCardsData = usePrevious(cardData);
+
+  const handleShowAll = () => {
+    setFilterBtnDis({ all: true, fav: false });
+    console.log(filterBtnDis);
+    setCardData(prevCardsData);
+  };
+
+  const handleShowFav = () => {
+    setFilterBtnDis({ all: false, fav: true });
+    console.log(filterBtnDis);
+    const cardsLiked = cardData.filter(function (item) {
+      return item.like === true;
+    });
+    setCardData(cardsLiked);
+  };
+
   return (
     <React.Fragment>
       <div className="cards__filter">
-        <button className="cards__filter-btn">Show All</button>
-        <button className="cards__filter-btn">Show Fav</button>
+        <button
+          className="cards__filter-btn"
+          onClick={handleShowAll}
+          disabled={filterBtnDis.all}>
+          Show All
+        </button>
+        <button
+          className="cards__filter-btn"
+          onClick={handleShowFav}
+          disabled={filterBtnDis.fav}>
+          Show Fav
+        </button>
       </div>
       <ul className="cards__wrapper">
         {cardData.map((item) => {
