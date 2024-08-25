@@ -30,12 +30,20 @@ $accentDark: #bb0633;
   }
   &__info {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     align-self: flex-end;
-    padding: 0 1rem;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.8);
+
+    &-title {
+      font-size: 1.25rem;
+      padding: 0.5rem;
+      width: 70%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     &-like,
     &-like__active {
@@ -43,6 +51,7 @@ $accentDark: #bb0633;
       justify-content: center;
       align-items: center;
       padding: 1rem;
+      margin: 0.5rem;
       border: none;
       border-radius: 50%;
       &:active {

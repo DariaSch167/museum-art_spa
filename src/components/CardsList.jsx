@@ -53,21 +53,29 @@ function CardsList() {
     setCardData(cardsLiked);
   };
 
-  let content;
+  let cardsContent;
 
-  // if (cardStatus === 'loading') {
-  //   content = <div>Loading...</div>;
-  // } else if (cardStatus === 'succeeded') {
-  //   content = (
-  //     <ul>
-  //       {cards.map((card) => (
-  //         <li key={card.id}>{card.title}</li>
-  //       ))}
-  //     </ul>
-  //   );
-  // } else if (cardStatus === 'failed') {
-  //   content = <div>{error}</div>;
-  // }
+  if (cardStatus === "loading") {
+    cardsContent = <div>Loading...</div>;
+  } else if (cardStatus === "succeeded") {
+    cardsContent = (
+      <ul className="cards__wrapper">
+        {cardData.map((item) => {
+          return (
+            <Card
+              key={item.id}
+              like={item.like}
+              cardImgSrc={item.imgURL}
+              cardTitle={item.title}
+              handleLikeChange={() => handleLikeChange(item.id)}
+            />
+          );
+        })}
+      </ul>
+    );
+  } else if (cardStatus === "failed") {
+    cardsContent = <div>{error}</div>;
+  }
 
   return (
     <React.Fragment>
@@ -85,19 +93,7 @@ function CardsList() {
           Show Fav
         </button>
       </div>
-      <ul className="cards__wrapper">
-        {cardData.map((item) => {
-          return (
-            <Card
-              key={item.id}
-              like={item.like}
-              cardImgSrc={item.imgURL}
-              cardTitle={item.title}
-              handleLikeChange={() => handleLikeChange(item.id)}
-            />
-          );
-        })}
-      </ul>
+      {cardsContent}
     </React.Fragment>
   );
 }
