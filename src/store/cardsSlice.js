@@ -1,39 +1,49 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchCards = createAsyncThunk("fetchCards", async () => {
-  const cardsData = await fetch("http://itgirlschool.justmakeit.ru/api/words");
-  const cardsDataJSON = await cardsData.json();
-  // const cards = cardsDataJSON.map(function (item) {
-  //   return (item = {
-  //     id: item.artObjects.id,
-  //     title: item.artObjects.title,
-  //     url: item.artObjects.headerImage.url,
-  //     like: false,
-  //   });
-  // });
-  return cardsDataJSON;
+export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
+  const response = await fetch(
+    "https://www.rijksmuseum.nl/api/nl/collection?key=grMARgGk&involvedMaker=Johannes+Vermeer"
+  );
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const dataJSON = await response.json();
+  const artObjects = dataJSON.artObjects;
+
+  const cardsData = artObjects.map(function (item) {
+    return (item = {
+      title: item.title,
+      longTitle: item.longTitle,
+      id: item.id,
+      imgSrc: item.headerImage.url,
+      imgURL: item.webImage.url,
+    });
+  });
+
+  return cardsData;
 });
 
-export const cardsSlice = createSlice({
+const cardsSlice = createSlice({
   name: "cards",
   initialState: {
-    isLoading: false,
-    data: [],
-    error: false,
+    items: [],
+    status: "idle", // idle, loading, succeeded, failed
+    error: null,
   },
-  extraReducer: (builder) => {
-    builder.addCase(fetchCards.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchCards.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = false;
-      state.data = action.payload;
-    });
-    builder.addCase(fetchCards.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-    });
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCards.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCards.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.items = action.payload;
+      })
+      .addCase(fetchCards.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 

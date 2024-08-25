@@ -4,22 +4,24 @@ import { fetchCards } from "../store/cardsSlice.js";
 import usePrevious from "../hooks/usePrevious.js";
 import Card from "./Card.jsx";
 import "../style.scss";
-import testData from "../test_data.json";
 
 function CardsList() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.cards);
+  const cards = useSelector((state) => state.cards.items);
+  const cardStatus = useSelector((state) => state.cards.status);
+  const error = useSelector((state) => state.cards.error);
+
+  const [cardData, setCardData] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchCards(), []);
-  });
-
-  console.log(data);
-
-  const initialData = testData.map(function (item) {
-    return (item = { ...item, like: false });
-  });
-  const [cardData, setCardData] = useState(initialData);
+    if (cardStatus === "idle") {
+      dispatch(fetchCards());
+    }
+    const initialData = cards.map(function (item) {
+      return (item = { ...item, like: false });
+    });
+    setCardData(initialData);
+  }, [cardStatus, cards, dispatch]);
 
   const handleLikeChange = (id) => {
     const card = cardData.find(function (item) {
@@ -51,6 +53,22 @@ function CardsList() {
     setCardData(cardsLiked);
   };
 
+  let content;
+
+  // if (cardStatus === 'loading') {
+  //   content = <div>Loading...</div>;
+  // } else if (cardStatus === 'succeeded') {
+  //   content = (
+  //     <ul>
+  //       {cards.map((card) => (
+  //         <li key={card.id}>{card.title}</li>
+  //       ))}
+  //     </ul>
+  //   );
+  // } else if (cardStatus === 'failed') {
+  //   content = <div>{error}</div>;
+  // }
+
   return (
     <React.Fragment>
       <div className="cards__filter">
@@ -73,7 +91,7 @@ function CardsList() {
             <Card
               key={item.id}
               like={item.like}
-              cardImgSrc={item.url}
+              cardImgSrc={item.imgURL}
               cardTitle={item.title}
               handleLikeChange={() => handleLikeChange(item.id)}
             />
