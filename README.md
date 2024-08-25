@@ -14,6 +14,6 @@ React, Redux Tool Kit, SCSS
 
 
 ## Deployment
-https://dariasch167.github.io/museum-art_spa/![image](https://github.com/user-attachments/assets/eb489fff-a10b-4753-947a-f0c67bebd3a0)
+https://dariasch167.github.io/museum-art_spa/
 
 ![Museum_spa_Vermeer2](https://github.com/user-attachments/assets/9f876bae-275d-4124-91eb-7a579d13e242)
