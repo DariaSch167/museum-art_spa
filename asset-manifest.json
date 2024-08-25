@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/museum-art_spa/static/css/main.efb5c75f.css",
+    "main.js": "/museum-art_spa/static/js/main.bf07aab5.js",
+    "static/js/453.30ec0a0a.chunk.js": "/museum-art_spa/static/js/453.30ec0a0a.chunk.js",
+    "static/media/like_icon.svg": "/museum-art_spa/static/media/like_icon.921c0e7295169bb8f77a8534adc23e10.svg",
+    "index.html": "/museum-art_spa/index.html",
+    "main.efb5c75f.css.map": "/museum-art_spa/static/css/main.efb5c75f.css.map",
+    "main.bf07aab5.js.map": "/museum-art_spa/static/js/main.bf07aab5.js.map",
+    "453.30ec0a0a.chunk.js.map": "/museum-art_spa/static/js/453.30ec0a0a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.efb5c75f.css",
+    "static/js/main.bf07aab5.js"
+  ]
+}
