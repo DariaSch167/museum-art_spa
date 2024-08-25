@@ -27,7 +27,7 @@ const cardsSlice = createSlice({
   name: "cards",
   initialState: {
     items: [],
-    status: "idle", // idle, loading, succeeded, failed
+    status: "idle",
     error: null,
   },
   reducers: {},
