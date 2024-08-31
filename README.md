@@ -3,6 +3,8 @@
 The app fetches data from RijksData API to render a list of the paintings according to the request. 
 The app's chosen filter is Vermeer Paintings.
 
+https://dariasch167.github.io/museum-art_spa/
+
 ## App features
 
 	1. List of the paintings
@@ -13,7 +15,6 @@ The app's chosen filter is Vermeer Paintings.
 React, Redux Tool Kit, SCSS
 
 
-## Deployment
-https://dariasch167.github.io/museum-art_spa/
+## Preview
 
 ![Museum_spa_Vermeer2](https://github.com/user-attachments/assets/9f876bae-275d-4124-91eb-7a579d13e242)
